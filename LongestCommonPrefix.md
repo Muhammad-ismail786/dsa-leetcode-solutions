@@ -1,16 +1,38 @@
-# Intuition
+# Longest Common Prefix
 
-The first thought was to treat the first string as a base and compare each of its characters with the same position in every other string. As soon as a mismatch is found, that marks the end of the common prefix.
+## Intuition
 
-# Approach
+The first thought was to treat the first string as a base and compare each
+character with the same position in every other string.
 
-Loop through each character (index i) of the first string (strs[0]). For each character, compare it with the character at the same position (i) in every other string (index j).
+## Approach
 
-If any string is too short or the character doesn't match, immediately return the substring of strs[0] from index 0 to i.
+Loop through each character of the first string...
 
-If the loop completes without any mismatch, the entire first string is the common prefix.
-
-# Complexity
+## Complexity
 
 - Time Complexity: O(n × m)
 - Space Complexity: O(1)
+
+## Code
+
+```cpp
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if (strs.empty())
+            return "";
+
+        for (int i = 0; i < strs[0].size(); i++) {
+            char currentChar = strs[0][i];
+
+            for (int j = 1; j < strs.size(); j++) {
+                if (i >= strs[j].size() || strs[j][i] != currentChar) {
+                    return strs[0].substr(0, i);
+                }
+            }
+        }
+
+        return strs[0];
+    }
+};
